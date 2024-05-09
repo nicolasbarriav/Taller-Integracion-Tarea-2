@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <!--Leaflet's Jvascript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    <link 
+        rel="stylesheet" 
+        href="style.css">           
+</head>
+<body>
+    <div class="container00">
+        <div class="container01">
+            <!-- map -->
+            <div id="map"></div>
+            
+            <!-- chat -->
+            <div class="chat-box">
+                <div class="mesasage-box"></div>
+                <input list="sugerencias" type='text' id='new_comment' placeholder='comment'/>    
+                <button onclick='sendMessage()'>Send</button>
+                <datalist id="sugerencias">
+                    <option value="Me quejo porque puedo"></option>
+                </datalist>
+            </div>
+        </div>
+        <div>
+            <!-- estaciones -->
+            <table class="estaciones-table" style="width:30%; float:left">
+                <tr>
+                    <th class="header" scope="col" colspan="3" style="text-align: center;">Estaciones</th>
+                </tr>
+                <tr>
+                    <th class="header">Nombre</th>
+                    <th class="header">ID</th>
+                    <th class="header">Linea</th>
+                </tr>
+            </table>
+
+            <!-- trenes -->
+            <table class="trenes-table"  style="width:70%; float:left;">
+                <tr>
+                    <th class="header" scope="col" colspan="5" style="text-align: center;">Trenes</th>
+                </tr>
+                <tr>
+                    <th class="header">ID</th>
+                    <th class="header">Chofer</th>
+                    <th class="header">Origen</th>
+                    <th class="header">Destino</th>
+                    <th class="header">Estacion Actual</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+<!-- Iconos -->
+<script src="https://kit.fontawesome.com/3c9effd9a5.js" crossorigin="anonymous"></script>
+
+<!-- WebSocketConnection -->
+<script src="websocket.js"></script>
+
+</html>
