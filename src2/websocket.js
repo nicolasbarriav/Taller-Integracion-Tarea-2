@@ -244,8 +244,31 @@ function setStatus(dataTrain){
     if (typeof dataTrain === 'undefined'){
         return 0;
     }
+    var train_id = dataTrain["train_id"];
+    if (!TrainsLocation[train_id]){
+        console.log("[ERROR] setStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainsLocation[train_id]  = {"lat" : lat, "long": long};
+    }
+    if(!TrainData[train_id]){
+        console.log("[ERROR] setStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainData[train_id] = {"line_id": 1 , "driver_name": "Albert Einseten"};
+        // const lista = await getData(); // [STATIONS,TRAINS,LINES]
+        // await createJSON(lista[1],TrainsLocation,TrainStatus,TrainData,Markers);
+    }
+    if(!TrainStatus[train_id]){
+        console.log("[ERROR] setStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainStatus[train_id] = {"estado": "moving"};
+    }
     try{
-        TrainStatus[dataTrain["train_id"]] = {"estado": dataTrain["status"]};
+        var existingMarker = Markers[train_id];
+        var lineID = TrainData[train_id]["line_id"] ;
+        var driverName = TrainData[train_id]["driver_name"];
+        var status = dataTrain["status"];
+        TrainStatus[train_id] = {"estado": dataTrain["status"]};
+        existingMarker.bindPopup(`ID: ${train_id}, Linea: ${lineID} , Chofer: ${driverName}, Estado: ${status}`);
     }catch (error) {
         console.error(`[ERROR] setStatus: ${error}`);
         return 0;
@@ -259,7 +282,21 @@ function setMapTrain(map, dataTrain){
     var lat = dataTrain["position"]["lat"];
     var long = dataTrain["position"]["long"];
     if (!TrainsLocation[train_id]){
+        console.log("[ERROR] setMapTrain: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
         TrainsLocation[train_id]  = {"lat" : lat, "long": long};
+    }
+    if(!TrainData[train_id]){
+        console.log("[ERROR] setMapTrain: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainData[train_id] = {"line_id": 1 , "driver_name": "Albert Einseten"};
+        // const lista = await getData(); // [STATIONS,TRAINS,LINES]
+        // await createJSON(lista[1],TrainsLocation,TrainStatus,TrainData,Markers);
+    }
+    if(!TrainStatus[train_id]){
+        console.log("[ERROR] setMapTrain: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainStatus[train_id] = {"estado": "moving"};
     }
     try{
         var existingMarker = Markers[train_id];
@@ -307,7 +344,21 @@ function setMapTrainStatus(map, dataTrain){
     }
     var train_id = dataTrain["train_id"];
     if (!TrainsLocation[train_id]){
-        TrainsLocation[train_id]  = {"lat" : 0, "long": 0};
+        console.log("[ERROR] setMapTrainStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainsLocation[train_id]  = {"lat" : lat, "long": long};
+    }
+    if(!TrainData[train_id]){
+        console.log("[ERROR] setMapTrainStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainData[train_id] = {"line_id": 1 , "driver_name": "Albert Einseten"};
+        // const lista = await getData(); // [STATIONS,TRAINS,LINES]
+        // await createJSON(lista[1],TrainsLocation,TrainStatus,TrainData,Markers);
+    }
+    if(!TrainStatus[train_id]){
+        console.log("[ERROR] setMapTrainStatus: TRAIN IS NOT IN THE ACTUAL SYSTEM. PLEASE LOAD THE PAGE AGAIN.");
+        return 0;
+        TrainStatus[train_id] = {"estado": "moving"};
     }
     var lat =  TrainsLocation[train_id]["lat"];
     var long = TrainsLocation[train_id]["long"];
